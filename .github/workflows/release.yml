@@ -21,13 +21,23 @@ jobs:
         run: npm install npm-pack-all
 
       - run: node node_modules/.bin/npm-pack-all
-      - uses: Klemensas/action-autotag@1.2.3
+      - uses: Klemensas/action-autotag@stable
         id: update_tag
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           tag_prefix: "v"
       - name: Create Release
+        if: steps.update_tag.outputs.tagname
+        uses: actions/create-release@v1.1.4
         id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ steps.update_tag.outputs.tagname }}
+          release_name: Release ${{ steps.update_tag.outputs.tagname }}
+          draft: false # Default value, but nice to set explicitly
+          prerelease: false # Default value, but nice to set explicitly
+      - name: gen_notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         run:  gh release create ${{ steps.update_tag.outputs.tagname }} --title "Release ${{ steps.update_tag.outputs.tagname }}" --generate-notes
