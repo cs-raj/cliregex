@@ -1,7 +1,7 @@
 {
-  "name": "clregex_test_rk1",
+  "name": "cli-regex-rk",
   "description": "Validate Fields with Regex Property of Content Type and Global Field in a Stack",
-  "version": "1.1.7",
+  "version": "1.1.5",
   "author": "Contentstack",
   "bugs": "https://github.com/contentstack/cli-cm-regex-validate/issues",
   "devDependencies": {
