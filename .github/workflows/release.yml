@@ -55,5 +55,4 @@ jobs:
         id: github-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run:  gh release create v${{ steps.package-version.outputs.current-version }} --title "Release ${{ steps.package-version.outputs.current-version }}" --generate-notes 
-        run:  gh release create v${{ steps.package-version.outputs.current-version }} ./dist/*.tgz
+        run:  gh release create v${{ steps.package-version.outputs.current-version }} --title "Release ${{ steps.package-version.outputs.current-version }}" --generate-notes v${{ steps.package-version.outputs.current-version }} ./dist/*.tgz
