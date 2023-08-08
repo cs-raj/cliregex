@@ -53,11 +53,12 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
       - name: install npm packall
         run: npm install npm-pack-all
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.3.2
+      - name: Create Release
+        uses: actions/create-release@v1.1.4
+        id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+
       - name: github-release
         id: github-release
         env:
@@ -69,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./cli-regex-rk-${{ steps.package-version.outputs.current-version }}.tgz
           asset_name: cli-regex-rk-${{ steps.package-version.outputs.current-version }}.tgz
           asset_content_type: application/tgz
