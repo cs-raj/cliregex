@@ -1,14 +1,14 @@
 {
   "name": "cli-regex-rk",
   "description": "Validate Fields with Regex Property of Content Type and Global Field in a Stack",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "author": "Contentstack",
   "bugs": "https://github.com/contentstack/cli-cm-regex-validate/issues",
   "devDependencies": {
     "@oclif/plugin-help": "^3.2.3",
     "@oclif/test": "^1.2.8",
     "@types/chai": "^4.2.21",
-    "@types/inquirer": "^8.1.1",
+    "@types/inquirer": "^8.1.1",  
     "@types/jest": "^29.1.2",
     "@types/jsonexport": "^3.0.2",
     "@types/mocha": "^10.0.0",
